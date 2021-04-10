@@ -21,9 +21,10 @@ TEST(OpMockTest, OpEvaluatePos) {
 TEST(OpMockTest, OpEvaluateZero) {
     ZeroOpMock* test = new ZeroOpMock();
     EXPECT_EQ(test->evaluate(), 0.0);
+}
 
 TEST(NegativeOpMock, OpEvaluateNeg) {
-    NegativeOpMock* test = new NegativeOpMock(-9);
+    NegativeOpMock* test = new NegativeOpMock();
     EXPECT_EQ(test->evaluate(), -9);
 }
 

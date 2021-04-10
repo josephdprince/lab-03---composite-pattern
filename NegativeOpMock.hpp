@@ -5,7 +5,7 @@
 
 class NegativeOpMock : public Base {
     public:
-        NegativeOpMock(double value) : Base() { }
+        NegativeOpMock() : Base() { }
         virtual double evaluate() { return -9; }
         virtual std::string stringify() { return "-9"; }
 };
