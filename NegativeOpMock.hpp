@@ -4,12 +4,10 @@
 #include "base.hpp"
 
 class NegativeOpMock : public Base {
-    private:
-	double negValue;
     public:
-        NegativeOpMock(double value) : Base() { negValue = value; }
-        virtual double evaluate() { return negValue; }
-        virtual std::string stringify() { return std::to_string(negValue); }
+        NegativeOpMock(double value) : Base() { }
+        virtual double evaluate() { return -9; }
+        virtual std::string stringify() { return "-9"; }
 };
 
 #endif //__NEGATIVE_OP_MOCK__
