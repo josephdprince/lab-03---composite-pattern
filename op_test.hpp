@@ -6,6 +6,7 @@
 #include "op.hpp"
 #include "NineOpMock.hpp"
 #include "ZeroOpMock.hpp"
+#include "NegativeOpMock.hpp"
 
 TEST(OpTest, OpEvaluateNonZero) {
     Op* test = new Op(8);
@@ -20,6 +21,10 @@ TEST(OpMockTest, OpEvaluatePos) {
 TEST(OpMockTest, OpEvaluateZero) {
     ZeroOpMock* test = new ZeroOpMock();
     EXPECT_EQ(test->evaluate(), 0.0);
+
+TEST(NegativeOpMock, OpEvaluateNeg) {
+    NegativeOpMock* test = new NegativeOpMock(-9);
+    EXPECT_EQ(test->evaluate(), -9);
 }
 
 #endif //__OP_TEST_HPP__
