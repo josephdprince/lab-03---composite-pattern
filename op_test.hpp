@@ -11,6 +11,7 @@
 #include "Div.hpp"
 #include "Add.hpp"
 #include "Pow.hpp"
+#include "Sub.hpp"
 
 TEST(OpTest, OpEvaluateNonZero) {
     Op* test = new Op(8);
@@ -139,4 +140,34 @@ TEST(PowTest, PowOp) {
     EXPECT_DOUBLE_EQ(test->evaluate(), 16.0);
     EXPECT_EQ(test->stringify(), "(2.000000**(2.000000**2.000000))");
 }
+
+TEST(SubTest, SubTwoPosNums) {
+    Op* val1 = new Op(4.3);
+    Op* val2 = new Op(3.7);
+
+    Sub* test = new Sub(val1, val2);
+    EXPECT_DOUBLE_EQ(test->evaluate(), 0.6);
+    EXPECT_EQ(test->stringify(), "(4.300000-3.700000)");
+}
+
+TEST(SubTest, FirstNumLarger) {
+    Op* val1 = new Op(3.7);
+    Op* val2 = new Op(4.3);
+
+    Sub* test = new Sub(val1, val2);
+    EXPECT_DOUBLE_EQ(test->evaluate(), -0.6);
+    EXPECT_EQ(test->stringify(), "(3.700000-4.300000)");
+}
+
+TEST(SubTest, SubOpChild) {
+    Op* val1 = new Op(3.79);
+    Op* val2 = new Op(1.32);
+    Op* val3 = new Op(2.95);
+    Sub* sub = new Sub(val2, val3);
+
+    Sub* test = new Sub(val1, sub);
+    EXPECT_DOUBLE_EQ(test->evaluate(), 5.42);
+    EXPECT_EQ(test->stringify(), "(3.790000-(1.320000-2.950000))");
+}
+
 #endif //__OP_TEST_HPP__
