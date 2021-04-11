@@ -10,6 +10,7 @@
 #include "Mult.hpp"
 #include "Div.hpp"
 #include "Add.hpp"
+#include "Pow.hpp"
 #include "Sub.hpp"
 
 TEST(OpTest, OpEvaluateNonZero) {
@@ -109,6 +110,35 @@ TEST(AddTest, AddWithOperationChild) {
     Add* test = new Add(val1, add1);
     EXPECT_DOUBLE_EQ(test->evaluate(), 15.8);
     EXPECT_EQ(test->stringify(), "(3.300000+(7.900000+4.600000))");
+}
+
+TEST(PowTest, TwoPosNums) {
+    Op* val1 = new Op(3.2);
+    Op* val2 = new Op(2.0);
+
+    Pow* test = new Pow(val1, val2);
+    EXPECT_DOUBLE_EQ(test->evaluate(), 10.24);
+    EXPECT_EQ(test->stringify(), "(3.200000**2.000000)");
+}
+
+TEST(PowTest, NegExponent) {
+    Op* val1 = new Op(2.7);
+    Op* val2 = new Op(-2.0);
+    
+    Pow* test = new Pow(val1, val2);
+    EXPECT_FLOAT_EQ(test->evaluate(), 0.137174211);
+    EXPECT_EQ(test->stringify(), "(2.700000**-2.000000)");
+}
+
+TEST(PowTest, PowOp) {
+    Op* val1 = new Op(2.0);
+    Op* val2 = new Op(2.0);
+    Op* val3 = new Op(2.0);
+    Pow* pow = new Pow(val2, val3);
+
+    Pow* test = new Pow(val1, pow);
+    EXPECT_DOUBLE_EQ(test->evaluate(), 16.0);
+    EXPECT_EQ(test->stringify(), "(2.000000**(2.000000**2.000000))");
 }
 
 TEST(SubTest, SubTwoPosNums) {
