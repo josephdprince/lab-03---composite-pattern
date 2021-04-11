@@ -9,6 +9,7 @@
 #include "NegativeOpMock.hpp"
 #include "Mult.hpp"
 #include "Div.hpp"
+#include "Add.hpp"
 
 TEST(OpTest, OpEvaluateNonZero) {
     Op* test = new Op(8);
@@ -78,6 +79,35 @@ TEST(DivTestOp, DivEvaluateOpInput) {
     Op* val3 = new Op(2.0);
     Div* op2 = new Div(op1, val3);
     EXPECT_FLOAT_EQ(op2->evaluate(), -2);
+}
+
+TEST(AddTest, AddTwoPosNums) {
+    Op* val1 = new Op(8);
+    Op* val2 = new Op(4);
+
+    Add* test = new Add(val1, val2);
+    EXPECT_DOUBLE_EQ(test->evaluate(), 12);
+    EXPECT_EQ(test->stringify(), "(8.000000+4.000000)");
+}
+
+TEST(AddTest, AddPosNegNum) {
+    Op* val1 = new Op(-4.3);
+    Op* val2 = new Op(9.7);
+
+    Add* test = new Add(val1, val2);
+    EXPECT_DOUBLE_EQ(test->evaluate(), 5.4);
+    EXPECT_EQ(test->stringify(), "(-4.300000+9.700000)");
+}
+
+TEST(AddTest, AddWithOperationChild) {
+    Op* val1 = new Op(3.3);
+    Op* val2 = new Op(7.9);
+    Op* val3 = new Op(4.6);
+    Add* add1 = new Add(val2, val3);
+
+    Add* test = new Add(val1, add1);
+    EXPECT_DOUBLE_EQ(test->evaluate(), 15.8);
+    EXPECT_EQ(test->stringify(), "(3.300000+(7.900000+4.600000))");
 }
 
 #endif //__OP_TEST_HPP__
