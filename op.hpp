@@ -5,8 +5,7 @@
 
 class Op : public Base {
     private:
-	double value;
-	std::string expression;   
+	double value;   
     public:
         Op(double value) : Base() { this->value = value; }
         virtual double evaluate() { return value; }
