@@ -58,5 +58,4 @@ TEST(AddTest, AddWithOperationChild) {
     EXPECT_EQ(test->stringify(), "(3.300000+(7.900000+4.600000))");
 }
 
-
 #endif //__OP_TEST_HPP__
